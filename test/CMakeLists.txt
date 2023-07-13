@@ -21,11 +21,14 @@ set(library_source_directory "${CMAKE_HOME_DIRECTORY}/../src")
 
 add_executable(
         xbox_math_tests
+        d3d_tests.cpp
         matrix_tests.cpp
         matrix_vector_tests.cpp
         test_main.cpp
         types_tests.cpp
         vector_tests.cpp
+        "${library_source_directory}/xbox_math_d3d.cpp"
+        "${library_source_directory}/xbox_math_d3d.h"
         "${library_source_directory}/xbox_math_frustum.cpp"
         "${library_source_directory}/xbox_math_frustum.h"
         "${library_source_directory}/xbox_math_matrix.cpp"

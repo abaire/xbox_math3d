@@ -42,7 +42,7 @@ inline float VectorDotVector(const vector_t &a, const vector_t &b) {
 
 void VectorLength(const vector_t &a, float &len);
 inline float VectorLength(const vector_t &v) {
-  return (float)sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+  return sqrtf(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
 }
 
 void VectorCrossVector(const vector_t &a, const vector_t &b, vector_t &sum);
