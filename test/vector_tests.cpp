@@ -1,4 +1,5 @@
 #include <boost/test/unit_test.hpp>
+#include <cmath>
 
 #include "xbox_math_vector.h"
 
@@ -149,6 +150,33 @@ BOOST_AUTO_TEST_CASE(vector_set_vector) {
   VectorSetVector(vec1, 12.f, -992.123f, 1024.f, -50.f);
 
   VECTOR_TEST(vec1, 12.f, -992.123f, 1024.f, -50.f);
+}
+
+BOOST_AUTO_TEST_CASE(vector_euclidean_with_1w) {
+  vector_t vec1{1.f, 0.2f, 0.3f, 1.f};
+
+  vector_t result;
+  VectorEuclidean(vec1, result);
+
+  VECTOR_TEST(result, vec1[0], vec1[1], vec1[2], 1.f);
+}
+
+BOOST_AUTO_TEST_CASE(vector_euclidean_with_infw) {
+  vector_t vec1{1.f, 0.2f, 0.3f, INFINITY};
+
+  vector_t result;
+  VectorEuclidean(vec1, result);
+
+  VECTOR_TEST(result, INFINITY, INFINITY, INFINITY, 1.f);
+}
+
+BOOST_AUTO_TEST_CASE(vector_euclidean) {
+  vector_t vec1{-1.f, 0.2f, 0.3f, -10.f};
+
+  vector_t result;
+  VectorEuclidean(vec1, result);
+
+  VECTOR_TEST(result, 0.1f, -0.02f, -0.03f, 1.f);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -60,6 +60,20 @@ inline void VectorSetVector(vector_t &dest, float x, float y, float z,
   dest[3] = w;
 }
 
+inline void VectorEuclidean(const vector_t &v, vector_t &result) {
+  if (v[3] == INFINITY) {
+    result[0] = INFINITY;
+    result[1] = INFINITY;
+    result[2] = INFINITY;
+    result[3] = 1.f;
+  } else {
+    result[0] = v[0] / v[3];
+    result[1] = v[1] / v[3];
+    result[2] = v[2] / v[3];
+    result[3] = 1.f;
+  }
+}
+
 }  // namespace XboxMath
 
 #endif  // XBOX_MATH_VECTOR_H_
