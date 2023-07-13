@@ -17,11 +17,11 @@ inline void VectorMultMatrix(vector_t &ret, const matrix4_t &a) {
 }
 
 inline void MatrixSetIdentity(matrix4_t &matrix) {
-  matrix[0][1] = matrix[0][2] = matrix[0][3] = 0.0f;
-  matrix[1][0] = matrix[1][2] = matrix[1][3] = 0.0f;
-  matrix[2][0] = matrix[2][1] = matrix[2][3] = 0.0f;
-  matrix[3][0] = matrix[3][2] = matrix[3][3] = 0.0f;
-  matrix[0][0] = matrix[1][1] = matrix[2][2] = matrix[3][3] = 1.0f;
+  memset(matrix, 0, sizeof(matrix));
+  matrix[0][0] = 1.f;
+  matrix[1][1] = 1.f;
+  matrix[2][2] = 1.f;
+  matrix[3][3] = 1.f;
 }
 
 inline void MatrixSetColumnVector(matrix4_t &matrix, const vector_t &v,
@@ -152,6 +152,16 @@ void MatrixCofactor(const matrix4_t &a, uint32_t row, uint32_t column,
 
 void MatrixAdjoint(matrix4_t &a);
 void MatrixAdjoint(const matrix4_t &a, matrix4_t &ret);
+
+void CreateTranslationMatrix(const vector_t &translation, matrix4_t &ret);
+void MatrixTranslate(const matrix4_t &mat, const vector_t &translation,
+                     matrix4_t &ret);
+
+void CreateScaleMatrix(const vector_t &scale, matrix4_t &ret);
+void MatrixScale(const matrix4_t &mat, const vector_t &scale, matrix4_t &ret);
+
+void MatrixRotate(const matrix4_t &mat, const vector_t &rotation,
+                  matrix4_t &ret);
 
 }  // namespace XboxMath
 
