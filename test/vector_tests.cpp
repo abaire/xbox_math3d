@@ -179,4 +179,28 @@ BOOST_AUTO_TEST_CASE(vector_euclidean) {
   VECTOR_TEST(result, 0.1f, -0.02f, -0.03f, 1.f);
 }
 
+BOOST_AUTO_TEST_CASE(vector_euclidean_with_1w_inline) {
+  vector_t vec1{1.f, 0.2f, 0.3f, 1.f};
+
+  VectorEuclidean(vec1);
+
+  VECTOR_TEST(vec1, 1.f, 0.2f, 0.3f, 1.f);
+}
+
+BOOST_AUTO_TEST_CASE(vector_euclidean_with_infw_inline) {
+  vector_t vec1{1.f, 0.2f, 0.3f, INFINITY};
+
+  VectorEuclidean(vec1);
+
+  VECTOR_TEST(vec1, INFINITY, INFINITY, INFINITY, 1.f);
+}
+
+BOOST_AUTO_TEST_CASE(vector_euclidean_inline) {
+  vector_t vec1{-1.f, 0.2f, 0.3f, -10.f};
+
+  VectorEuclidean(vec1);
+
+  VECTOR_TEST(vec1, 0.1f, -0.02f, -0.03f, 1.f);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

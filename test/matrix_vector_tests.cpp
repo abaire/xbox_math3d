@@ -26,7 +26,19 @@ BOOST_AUTO_TEST_CASE(vector_mult_matrix) {
                  0.20f, 0.43f, -0.67f, -0.21f, 0.47f, 0.03f, 0.61f, 0.25f};
   vector_t vec1 = {1.0f, 0.20f, 0.30f, 1.0f};
 
+  vector_t result;
+  VectorMultMatrix(vec1, mat1, result);
+
+  VECTOR_TEST(result, 1.448f, -0.003f, -0.125f, 0.909f);
+}
+
+BOOST_AUTO_TEST_CASE(vector_mult_matrix_inline) {
+  matrix4_t mat1{0.45f, 0.80f, -0.44f, 0.97f,  0.10f, 0.14f, 0.93f, -0.41f,
+                 0.20f, 0.43f, -0.67f, -0.21f, 0.47f, 0.03f, 0.61f, 0.25f};
+  vector_t vec1 = {1.0f, 0.20f, 0.30f, 1.0f};
+
   VectorMultMatrix(vec1, mat1);
+
   VECTOR_TEST(vec1, 1.448f, -0.003f, -0.125f, 0.909f);
 }
 

@@ -74,6 +74,8 @@ inline void VectorEuclidean(const vector_t &v, vector_t &result) {
   }
 }
 
+inline void VectorEuclidean(vector_t &v) { VectorEuclidean(v, v); }
+
 }  // namespace XboxMath
 
 #endif  // XBOX_MATH_VECTOR_H_
