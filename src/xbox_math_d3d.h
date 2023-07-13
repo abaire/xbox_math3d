@@ -5,6 +5,9 @@
 
 namespace XboxMath {
 
+void CreateWorldView(const vector_t &translation, const vector_t &rotation,
+                     matrix4_t &ret);
+
 void CreateD3DLookAtLH(matrix4_t &ret, const vector_t &eye, const vector_t &at,
                        const vector_t &up);
 

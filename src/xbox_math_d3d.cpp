@@ -5,6 +5,19 @@
 
 namespace XboxMath {
 
+void CreateWorldView(const vector_t &translation, const vector_t &rotation,
+                     matrix4_t &ret) {
+  vector_t inv_translation{-translation[0], -translation[1], -translation[2],
+                           translation[3]};
+
+  vector_t inv_rotation{-rotation[0], -rotation[1], -rotation[2], rotation[3]};
+
+  MatrixSetIdentity(ret);
+  matrix4_t temp;
+  MatrixTranslate(ret, inv_translation, temp);
+  MatrixRotate(temp, inv_rotation, ret);
+}
+
 void CreateD3DLookAtLH(matrix4_t &ret, const vector_t &eye, const vector_t &at,
                        const vector_t &up) {
   // https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxmatrix4_tlookatlh

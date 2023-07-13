@@ -21,6 +21,19 @@ BOOST_AUTO_TEST_SUITE(xbox_math_d3d_suite)
   VECTOR_TEST((m)[2], m31, m32, m33, m34);                                    \
   VECTOR_TEST((m)[3], m41, m42, m43, m44)
 
+BOOST_AUTO_TEST_CASE(test_create_world_view) {
+  vector_t translation{10.f, 33.f, -0.1234f, 1.0f};
+  vector_t rotation{M_PI * 0.5f, M_PI * 0.25f, M_PI, 0.0};
+
+  matrix4_t result;
+  CreateWorldView(translation, rotation, result);
+
+  MATRIX_TEST(result, -0.707106769f, -0.707106769f, -5.65141569e-08f, 0.f,
+              -6.18172393e-08f, -1.8105851e-08f, 1.f, 0.f, -0.707106769f,
+              0.707106769f, -3.09086197e-08f, 0.f, 6.98381281f, 7.1583252f,
+              -33.f, 1.f);
+}
+
 BOOST_AUTO_TEST_CASE(test_create_d3d_look_at_lh) {
   vector_t eye{-0.3f, 1.25f, -5.f, 1.f};
   vector_t at{0.f, 0.f, 0.f, 1.f};
