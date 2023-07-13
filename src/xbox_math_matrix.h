@@ -156,12 +156,15 @@ void MatrixAdjoint(const matrix4_t &a, matrix4_t &ret);
 void CreateTranslationMatrix(const vector_t &translation, matrix4_t &ret);
 void MatrixTranslate(const matrix4_t &mat, const vector_t &translation,
                      matrix4_t &ret);
+void MatrixTranslate(matrix4_t &mat, const vector_t &translation);
 
 void CreateScaleMatrix(const vector_t &scale, matrix4_t &ret);
 void MatrixScale(const matrix4_t &mat, const vector_t &scale, matrix4_t &ret);
+void MatrixScale(matrix4_t &mat, const vector_t &scale);
 
 void MatrixRotate(const matrix4_t &mat, const vector_t &rotation,
                   matrix4_t &ret);
+void MatrixRotate(matrix4_t &mat, const vector_t &rotation);
 
 }  // namespace XboxMath
 

@@ -232,6 +232,12 @@ void MatrixTranslate(const matrix4_t &mat, const vector_t &translation,
   MatrixMultMatrix(mat, translation_matrix, ret);
 }
 
+void MatrixTranslate(matrix4_t &mat, const vector_t &translation) {
+  matrix4_t tmp;
+  MatrixTranslate(mat, translation, tmp);
+  MatrixCopyMatrix(mat, tmp);
+}
+
 void CreateScaleMatrix(const vector_t &scale, matrix4_t &ret) {
   MatrixSetIdentity(ret);
   ret[0][0] = scale[0];
@@ -243,6 +249,12 @@ void MatrixScale(const matrix4_t &mat, const vector_t &scale, matrix4_t &ret) {
   matrix4_t scale_matrix;
   CreateScaleMatrix(scale, scale_matrix);
   MatrixMultMatrix(mat, scale_matrix, ret);
+}
+
+void MatrixScale(matrix4_t &mat, const vector_t &scale) {
+  matrix4_t tmp;
+  MatrixScale(mat, scale, tmp);
+  MatrixCopyMatrix(mat, tmp);
 }
 
 void MatrixRotate(const matrix4_t &mat, const vector_t &rotation,
@@ -276,6 +288,12 @@ void MatrixRotate(const matrix4_t &mat, const vector_t &rotation,
   temp[2][1] = -sin_rx;
   temp[2][2] = cos_rx;
   MatrixMultMatrix(ret, temp);
+}
+
+void MatrixRotate(matrix4_t &mat, const vector_t &rotation) {
+  matrix4_t tmp;
+  MatrixRotate(mat, rotation, tmp);
+  MatrixCopyMatrix(mat, tmp);
 }
 
 }  // namespace XboxMath
