@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include <cstring>
+#include <limits>
 
 #include "xbox_math_types.h"
 
@@ -61,6 +62,7 @@ inline void VectorSetVector(vector_t &dest, float x, float y, float z,
 }
 
 inline void VectorEuclidean(const vector_t &v, vector_t &result) {
+  const float INFINITY = std::numeric_limits<float>::infinity();
   if (v[3] == INFINITY) {
     result[0] = INFINITY;
     result[1] = INFINITY;

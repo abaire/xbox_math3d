@@ -98,35 +98,35 @@ void MatrixTranspose(matrix4_t &a);
 
 void MatrixDeterminant(const matrix4_t &a, float &ret);
 inline float MatrixDeterminant(const matrix4_t &mat) {
-  auto &a = mat[0][0];
-  auto &b = mat[0][1];
-  auto &c = mat[0][2];
-  auto &d = mat[0][3];
-  auto &e = mat[1][0];
-  auto &f = mat[1][1];
-  auto &g = mat[1][2];
-  auto &h = mat[1][3];
-  auto &i = mat[2][0];
-  auto &j = mat[2][1];
-  auto &k = mat[2][2];
-  auto &l = mat[2][3];
-  auto &m = mat[3][0];
-  auto &n = mat[3][1];
-  auto &o = mat[3][2];
-  auto &p = mat[3][3];
+  const float &a = mat[0][0];
+  const float &b = mat[0][1];
+  const float &c = mat[0][2];
+  const float &d = mat[0][3];
+  const float &e = mat[1][0];
+  const float &f = mat[1][1];
+  const float &g = mat[1][2];
+  const float &h = mat[1][3];
+  const float &i = mat[2][0];
+  const float &j = mat[2][1];
+  const float &k = mat[2][2];
+  const float &l = mat[2][3];
+  const float &m = mat[3][0];
+  const float &n = mat[3][1];
+  const float &o = mat[3][2];
+  const float &p = mat[3][3];
 
-  auto in = i * n;
-  auto io = i * o;
-  auto ip = i * p;
-  auto jm = j * m;
-  auto jo = j * o;
-  auto jp = j * p;
-  auto km = k * m;
-  auto kn = k * n;
-  auto kp = k * p;
-  auto lm = l * m;
-  auto ln = l * n;
-  auto lo = l * o;
+  float in = i * n;
+  float io = i * o;
+  float ip = i * p;
+  float jm = j * m;
+  float jo = j * o;
+  float jp = j * p;
+  float km = k * m;
+  float kn = k * n;
+  float kp = k * p;
+  float lm = l * m;
+  float ln = l * n;
+  float lo = l * o;
 
   return a * (f * (kp - lo) - g * (jp - ln) + h * (jo - kn)) -
          b * (e * (kp - lo) - g * (ip - lm) + h * (io - km)) +
@@ -136,15 +136,15 @@ inline float MatrixDeterminant(const matrix4_t &mat) {
 
 void MatrixDeterminant(const matrix3_t &a, float &ret);
 inline float MatrixDeterminant(const matrix3_t &mat) {
-  auto &a = mat[0][0];
-  auto &b = mat[0][1];
-  auto &c = mat[0][2];
-  auto &d = mat[1][0];
-  auto &e = mat[1][1];
-  auto &f = mat[1][2];
-  auto &g = mat[2][0];
-  auto &h = mat[2][1];
-  auto &i = mat[2][2];
+  const float &a = mat[0][0];
+  const float &b = mat[0][1];
+  const float &c = mat[0][2];
+  const float &d = mat[1][0];
+  const float &e = mat[1][1];
+  const float &f = mat[1][2];
+  const float &g = mat[2][0];
+  const float &h = mat[2][1];
+  const float &i = mat[2][2];
 
   return a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);
 }

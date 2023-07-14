@@ -7,10 +7,11 @@ namespace XboxMath {
 
 void CreateWorldView(const vector_t &translation, const vector_t &rotation,
                      matrix4_t &ret) {
-  vector_t inv_translation{-translation[0], -translation[1], -translation[2],
-                           translation[3]};
+  vector_t inv_translation = {-translation[0], -translation[1], -translation[2],
+                              translation[3]};
 
-  vector_t inv_rotation{-rotation[0], -rotation[1], -rotation[2], rotation[3]};
+  vector_t inv_rotation = {-rotation[0], -rotation[1], -rotation[2],
+                           rotation[3]};
 
   MatrixSetIdentity(ret);
   matrix4_t temp;
@@ -21,15 +22,15 @@ void CreateWorldView(const vector_t &translation, const vector_t &rotation,
 void CreateD3DLookAtLH(matrix4_t &ret, const vector_t &eye, const vector_t &at,
                        const vector_t &up) {
   // https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxmatrix4_tlookatlh
-  vector_t z_axis{0.f, 0.f, 0.f, 1.f};
+  vector_t z_axis = {0.f, 0.f, 0.f, 1.f};
   VectorSubtractVector(at, eye, z_axis);
   VectorNormalize(z_axis);
 
-  vector_t x_axis{0.f, 0.f, 0.f, 1.f};
+  vector_t x_axis = {0.f, 0.f, 0.f, 1.f};
   VectorCrossVector(up, z_axis, x_axis);
   VectorNormalize(x_axis);
 
-  vector_t y_axis{0.f, 0.f, 0.f, 1.f};
+  vector_t y_axis = {0.f, 0.f, 0.f, 1.f};
   VectorCrossVector(z_axis, x_axis, y_axis);
   VectorNormalize(y_axis);
 
@@ -112,7 +113,7 @@ void CreateD3DStandardViewport16Bit(matrix4_t &ret, float width, float height) {
 
 void CreateD3DStandardViewport16BitFloat(matrix4_t &ret, float width,
                                          float height) {
-  constexpr uint32_t max_value_int = 0x43FFF800;
+  const uint32_t max_value_int = 0x43FFF800;
   float max_value = *(float *)&max_value_int;
   CreateD3DViewport(ret, width, height, (float)max_value, 0.0f, 1.0f);
 }
@@ -123,7 +124,7 @@ void CreateD3DStandardViewport24Bit(matrix4_t &ret, float width, float height) {
 
 void CreateD3DStandardViewport24BitFloat(matrix4_t &ret, float width,
                                          float height) {
-  constexpr uint32_t max_value_int = 0x7149F2CA;
+  const uint32_t max_value_int = 0x7149F2CA;
   float max_value = *(float *)&max_value_int;
   CreateD3DViewport(ret, width, height, max_value, 0.0f, 1.0f);
 }

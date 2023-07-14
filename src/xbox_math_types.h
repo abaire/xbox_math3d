@@ -2,7 +2,12 @@
 #define XBOX_MATH_TYPES_H_
 
 #include <cmath>
+
+#if (__cplusplus >= 201103L)
 #include <cstdint>
+#else
+typedef unsigned long uint32_t;
+#endif
 
 namespace XboxMath {
 
