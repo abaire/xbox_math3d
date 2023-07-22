@@ -14,6 +14,9 @@ void CreateD3DLookAtLH(matrix4_t &ret, const vector_t &eye, const vector_t &at,
 void CreateD3DPerspectiveFOVLH(matrix4_t &ret, float fov_y, float aspect,
                                float z_near, float z_far);
 
+void CreateD3DOrthographicLH(matrix4_t &ret, float left, float right, float top,
+                             float bottom, float z_near, float z_far);
+
 void CreateD3DViewport(matrix4_t &ret, float width, float height,
                        float max_depthbuffer_value, float z_min, float z_max);
 

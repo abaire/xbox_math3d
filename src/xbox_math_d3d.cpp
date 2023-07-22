@@ -70,6 +70,30 @@ void CreateD3DPerspectiveFOVLH(matrix4_t &ret, float fov1, float aspect,
   ret[3][3] = 0.f;
 }
 
+void CreateD3DOrthographicLH(matrix4_t &ret, float left, float right, float top,
+                             float bottom, float z_near, float z_far) {
+  const float inv_depth = 1.f / (z_near - z_far);
+  ret[0][0] = 2.f / (right - left);
+  ret[0][1] = 0.f;
+  ret[0][2] = 0.f;
+  ret[0][3] = 0.f;
+
+  ret[1][0] = 0.f;
+  ret[1][1] = 2.f / (top - bottom);
+  ret[1][2] = 0.f;
+  ret[1][3] = 0.f;
+
+  ret[2][0] = 0.f;
+  ret[2][1] = 0.f;
+  ret[2][2] = -1.f * inv_depth;
+  ret[2][3] = 0.f;
+
+  ret[3][0] = (left + right) / (left - right);
+  ret[3][1] = (top + bottom) / (bottom - top);
+  ret[3][2] = z_near * inv_depth;
+  ret[3][3] = 1.f;
+}
+
 void CreateD3DViewport(matrix4_t &ret, float width, float height,
                        float max_depthbuffer_value, float z_min, float z_max) {
   MatrixSetIdentity(ret);
