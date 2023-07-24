@@ -22,24 +22,24 @@ BOOST_AUTO_TEST_SUITE(xbox_math_matrix_vector_suite)
   VECTOR_TEST((m)[3], m41, m42, m43, m44)
 
 BOOST_AUTO_TEST_CASE(vector_mult_matrix) {
-  matrix4_t mat1{0.45f, 0.80f, -0.44f, 0.97f,  0.10f, 0.14f, 0.93f, -0.41f,
-                 0.20f, 0.43f, -0.67f, -0.21f, 0.47f, 0.03f, 0.61f, 0.25f};
-  vector_t vec1 = {1.0f, 0.20f, 0.30f, 1.0f};
+  matrix4_t mat1{5.f, 38.f, -5.f, 15.f, 1.f,  2.f, 9.f,  -4.f,
+                 2.f, 14.f, -7.f, -2.f, 10.f, 3.f, 66.f, 12.f};
+  vector_t vec1{1.f, 2.f, 3.f, 1.f};
 
   vector_t result;
   VectorMultMatrix(vec1, mat1, result);
 
-  VECTOR_TEST(result, 1.448f, -0.003f, -0.125f, 0.909f);
+  VECTOR_TEST(result, 23.f, 87.f, 58.f, 13.f);
 }
 
 BOOST_AUTO_TEST_CASE(vector_mult_matrix_inline) {
-  matrix4_t mat1{0.45f, 0.80f, -0.44f, 0.97f,  0.10f, 0.14f, 0.93f, -0.41f,
-                 0.20f, 0.43f, -0.67f, -0.21f, 0.47f, 0.03f, 0.61f, 0.25f};
-  vector_t vec1 = {1.0f, 0.20f, 0.30f, 1.0f};
+  matrix4_t mat1{5.f, 38.f, -5.f, 15.f, 1.f,  2.f, 9.f,  -4.f,
+                 2.f, 14.f, -7.f, -2.f, 10.f, 3.f, 66.f, 12.f};
+  vector_t vec1{1.f, 2.f, 3.f, 1.f};
 
   VectorMultMatrix(vec1, mat1);
 
-  VECTOR_TEST(vec1, 1.448f, -0.003f, -0.125f, 0.909f);
+  VECTOR_TEST(vec1, 23.f, 87.f, 58.f, 13.f);
 }
 
 BOOST_AUTO_TEST_CASE(matrix_set_column_vector) {
