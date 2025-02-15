@@ -26,6 +26,7 @@ add_executable(
         matrix_vector_tests.cpp
         test_main.cpp
         types_tests.cpp
+        util_tests.cpp
         vector_tests.cpp
         "${library_source_directory}/xbox_math_d3d.cpp"
         "${library_source_directory}/xbox_math_d3d.h"
@@ -37,8 +38,11 @@ add_executable(
         "${library_source_directory}/xbox_math_quaternion.h"
         "${library_source_directory}/xbox_math_types.cpp"
         "${library_source_directory}/xbox_math_types.h"
+        "${library_source_directory}/xbox_math_util.cpp"
+        "${library_source_directory}/xbox_math_util.h"
         "${library_source_directory}/xbox_math_vector.cpp"
         "${library_source_directory}/xbox_math_vector.h"
+        util_tests.cpp
 )
 target_include_directories(
         xbox_math_tests

@@ -62,11 +62,11 @@ inline void VectorSetVector(vector_t &dest, float x, float y, float z,
 }
 
 inline void VectorEuclidean(const vector_t &v, vector_t &result) {
-  const float INFINITY = std::numeric_limits<float>::infinity();
-  if (v[3] == INFINITY) {
-    result[0] = INFINITY;
-    result[1] = INFINITY;
-    result[2] = INFINITY;
+  const float kInfinity = std::numeric_limits<float>::infinity();
+  if (v[3] == kInfinity) {
+    result[0] = kInfinity;
+    result[1] = kInfinity;
+    result[2] = kInfinity;
     result[3] = 1.f;
   } else {
     result[0] = v[0] / v[3];

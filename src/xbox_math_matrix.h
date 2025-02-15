@@ -136,25 +136,32 @@ inline float MatrixDeterminant(const matrix4_t &mat) {
 
 void MatrixDeterminant(const matrix3_t &a, float &ret);
 inline float MatrixDeterminant(const matrix3_t &mat) {
-  const float &a = mat[0][0];
-  const float &b = mat[0][1];
-  const float &c = mat[0][2];
-  const float &d = mat[1][0];
-  const float &e = mat[1][1];
-  const float &f = mat[1][2];
-  const float &g = mat[2][0];
-  const float &h = mat[2][1];
-  const float &i = mat[2][2];
+  const double a = mat[0][0];
+  const double b = mat[0][1];
+  const double c = mat[0][2];
+  const double d = mat[1][0];
+  const double e = mat[1][1];
+  const double f = mat[1][2];
+  const double g = mat[2][0];
+  const double h = mat[2][1];
+  const double i = mat[2][2];
 
-  return a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);
+  return (float)(a * (e * i - f * h) - b * (d * i - f * g) +
+                 c * (d * h - e * g));
 }
 
-void MatrixInvert(const matrix4_t &a, matrix4_t &ret);
+//! Calculates the inverse of `a` and saves it to `ret`.
+//! \return false if `a` is not invertible.
+bool MatrixInvert(const matrix4_t &a, matrix4_t &ret);
 
-void MatrixCofactor(const matrix4_t &a, uint32_t row, uint32_t column,
-                    matrix3_t &ret);
+//! Populates `ret` with the submatrix of `a` formed by ignoring `row` and
+//`column`
+void MatrixSubmatrix(const matrix4_t &a, uint32_t row, uint32_t column,
+                     matrix3_t &ret);
 
+//! Replaces `a` with its adjoint.
 void MatrixAdjoint(matrix4_t &a);
+//! Calculates the adjoint of `a` and saves it to `ret`.
 void MatrixAdjoint(const matrix4_t &a, matrix4_t &ret);
 
 void CreateTranslationMatrix(const vector_t &translation, matrix4_t &ret);

@@ -167,12 +167,19 @@ void MatrixDeterminant(const matrix3_t &a, float &ret) {
   ret = MatrixDeterminant(a);
 }
 
-void MatrixInvert(const matrix4_t &a, matrix4_t &ret) {
+bool MatrixInvert(const matrix4_t &a, matrix4_t &ret) {
   DBGASSERT(&a != &ret);
+  auto determinant = MatrixDeterminant(a);
+  if (determinant == 0.0f) {
+    return false;
+  }
+
   MatrixCopyMatrix(ret, a);
   MatrixAdjoint(ret);
 
-  ScalarMultMatrix(ret, 1.0f / MatrixDeterminant(a));
+  ScalarMultMatrix(ret, 1.0f / determinant);
+
+  return true;
 }
 
 void MatrixAdjoint(matrix4_t &a) {
@@ -185,19 +192,19 @@ void MatrixAdjoint(const matrix4_t &a, matrix4_t &ret) {
   DBGASSERT(&a != &ret);
   float sign = 1.f;
 
-  matrix3_t cofactor_matrix;
+  matrix3_t submatrix;
   for (auto r = 0; r < 4; ++r) {
     for (auto c = 0; c < 4; ++c) {
-      MatrixCofactor(a, r, c, cofactor_matrix);
-      ret[c][r] = sign * MatrixDeterminant(cofactor_matrix);
+      MatrixSubmatrix(a, r, c, submatrix);
+      ret[c][r] = sign * MatrixDeterminant(submatrix);
       sign *= -1.f;
     }
     sign *= -1.f;
   }
 }
 
-void MatrixCofactor(const matrix4_t &a, uint32_t row, uint32_t column,
-                    matrix3_t &ret) {
+void MatrixSubmatrix(const matrix4_t &a, uint32_t row, uint32_t column,
+                     matrix3_t &ret) {
   auto orow = 0;
 
   for (auto r = 0; r < 4; ++r) {
