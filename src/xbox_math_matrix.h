@@ -96,46 +96,47 @@ void MatrixMultMatrix(matrix4_t &a, const matrix4_t &b);
 void MatrixTranspose(const matrix4_t &a, matrix4_t &ret);
 void MatrixTranspose(matrix4_t &a);
 
-void MatrixDeterminant(const matrix4_t &a, float &ret);
-inline float MatrixDeterminant(const matrix4_t &mat) {
-  const float &a = mat[0][0];
-  const float &b = mat[0][1];
-  const float &c = mat[0][2];
-  const float &d = mat[0][3];
-  const float &e = mat[1][0];
-  const float &f = mat[1][1];
-  const float &g = mat[1][2];
-  const float &h = mat[1][3];
-  const float &i = mat[2][0];
-  const float &j = mat[2][1];
-  const float &k = mat[2][2];
-  const float &l = mat[2][3];
-  const float &m = mat[3][0];
-  const float &n = mat[3][1];
-  const float &o = mat[3][2];
-  const float &p = mat[3][3];
+inline double MatrixDeterminant(const matrix4_t &mat) {
+  const double &a = mat[0][0];
+  const double &b = mat[0][1];
+  const double &c = mat[0][2];
+  const double &d = mat[0][3];
+  const double &e = mat[1][0];
+  const double &f = mat[1][1];
+  const double &g = mat[1][2];
+  const double &h = mat[1][3];
+  const double &i = mat[2][0];
+  const double &j = mat[2][1];
+  const double &k = mat[2][2];
+  const double &l = mat[2][3];
+  const double &m = mat[3][0];
+  const double &n = mat[3][1];
+  const double &o = mat[3][2];
+  const double &p = mat[3][3];
 
-  float in = i * n;
-  float io = i * o;
-  float ip = i * p;
-  float jm = j * m;
-  float jo = j * o;
-  float jp = j * p;
-  float km = k * m;
-  float kn = k * n;
-  float kp = k * p;
-  float lm = l * m;
-  float ln = l * n;
-  float lo = l * o;
+  const double in = i * n;
+  const double io = i * o;
+  const double ip = i * p;
+  const double jm = j * m;
+  const double jo = j * o;
+  const double jp = j * p;
+  const double km = k * m;
+  const double kn = k * n;
+  const double kp = k * p;
+  const double lm = l * m;
+  const double ln = l * n;
+  const double lo = l * o;
 
   return a * (f * (kp - lo) - g * (jp - ln) + h * (jo - kn)) -
          b * (e * (kp - lo) - g * (ip - lm) + h * (io - km)) +
          c * (e * (jp - ln) - f * (ip - lm) + h * (in - jm)) -
          d * (e * (jo - kn) - f * (io - km) + g * (in - jm));
 }
+inline void MatrixDeterminant(const matrix4_t &a, double &ret) {
+  ret = MatrixDeterminant(a);
+}
 
-void MatrixDeterminant(const matrix3_t &a, float &ret);
-inline float MatrixDeterminant(const matrix3_t &mat) {
+inline double MatrixDeterminant(const matrix3_t &mat) {
   const double a = mat[0][0];
   const double b = mat[0][1];
   const double c = mat[0][2];
@@ -146,8 +147,11 @@ inline float MatrixDeterminant(const matrix3_t &mat) {
   const double h = mat[2][1];
   const double i = mat[2][2];
 
-  return (float)(a * (e * i - f * h) - b * (d * i - f * g) +
-                 c * (d * h - e * g));
+  return a * (e * i - f * h) - b * (d * i - f * g) +
+                 c * (d * h - e * g);
+}
+inline void MatrixDeterminant(const matrix3_t &a, double &ret) {
+  ret = MatrixDeterminant(a);
 }
 
 //! Calculates the inverse of `a` and saves it to `ret`.

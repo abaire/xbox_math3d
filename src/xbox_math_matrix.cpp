@@ -159,14 +159,6 @@ void MatrixTranspose(matrix4_t &a) {
   MatrixCopyMatrix(a, temp);
 }
 
-void MatrixDeterminant(const matrix4_t &a, float &ret) {
-  ret = MatrixDeterminant(a);
-}
-
-void MatrixDeterminant(const matrix3_t &a, float &ret) {
-  ret = MatrixDeterminant(a);
-}
-
 bool MatrixInvert(const matrix4_t &a, matrix4_t &ret) {
   DBGASSERT(&a != &ret);
   auto determinant = MatrixDeterminant(a);
@@ -196,7 +188,7 @@ void MatrixAdjoint(const matrix4_t &a, matrix4_t &ret) {
   for (auto r = 0; r < 4; ++r) {
     for (auto c = 0; c < 4; ++c) {
       MatrixSubmatrix(a, r, c, submatrix);
-      ret[c][r] = sign * MatrixDeterminant(submatrix);
+      ret[c][r] = static_cast<float>(sign * MatrixDeterminant(submatrix));
       sign *= -1.f;
     }
     sign *= -1.f;
