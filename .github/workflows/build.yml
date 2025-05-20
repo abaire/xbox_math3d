@@ -1,0 +1,74 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '.github/**'
+      - '!.github/workflows/**'
+      - 'README.md'
+  pull_request:
+    paths-ignore:
+      - '.github/**'
+      - '!.github/workflows/**'
+      - 'README.md'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+jobs:
+  BuildLinux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone tree
+        uses: actions/checkout@v4
+      - name: Compile
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -- -j$(grep -c processor /proc/cpuinfo)
+          find build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: libxbox_math3d-linux-x86_64
+          path: build/libxbox_math3d.a
+
+  BuildMacOS:
+    name: Build macOS
+    runs-on: macOS-latest
+    steps:
+      - name: Clone tree
+        uses: actions/checkout@v4
+      - name: Compile
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -- -j
+          find build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: libxbox_math3d-macOS-aarch64
+          path: build/libxbox_math3d.a
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Clone tree
+        uses: actions/checkout@v4
+      - name: Setup development environment
+        uses: TheMrMilchmann/setup-msvc-dev@v3.0.1
+        with:
+          arch: x64
+      - name: Compile
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: libxbox_math3d-windows-x86_64
+          path: build/libxbox_math3d.a

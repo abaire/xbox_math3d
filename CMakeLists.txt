@@ -4,7 +4,8 @@ project(xbox_math3d VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_library(xbox_math3d
+add_library(
+        xbox_math3d
         src/xbox_math_d3d.cpp
         src/xbox_math_d3d.h
         src/xbox_math_frustum.cpp
@@ -19,6 +20,12 @@ add_library(xbox_math3d
         src/xbox_math_util.h
         src/xbox_math_vector.cpp
         src/xbox_math_vector.h
+)
+
+target_compile_definitions(
+        xbox_math3d
+        PRIVATE
+        _USE_MATH_DEFINES
 )
 
 install(

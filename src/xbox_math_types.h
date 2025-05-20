@@ -3,7 +3,7 @@
 
 #include <cmath>
 
-#if (__cplusplus >= 201103L)
+#if (__cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER >= 1900))
 #include <cstdint>
 #else
 typedef unsigned long uint32_t;
