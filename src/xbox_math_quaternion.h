@@ -2,6 +2,7 @@
 #define XBOX_MATH_QUATERNION_H_
 
 #include <cmath>
+#include <cstdint>
 
 #include "xbox_math_types.h"
 
